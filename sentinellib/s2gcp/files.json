@@ -1,0 +1,22 @@
+{
+    "MSIL1C": {
+        "include": [
+            "rep_info/S2_User_Product_Level-1C_Metadata.xsd"
+        ],
+        "exclude": [
+            "HTML/UserProduct_index.html",
+            "HTML/UserProduct_index.xsl"
+        ]
+    },
+    "MSIL2A": {
+        "include": [
+            "rep_info/S2_User_Product_Level-2A_Metadata.xsd",
+            "rep_info/S2_PDI_Level-2A_Datastrip_Metadata.xsd",
+            "rep_info/S2_PDI_Level-2A_Tile_Metadata.xsd"
+        ],
+        "exclude": [
+            "HTML/UserProduct_index.html",
+            "HTML/UserProduct_index.xsl"
+        ]
+    }
+}
