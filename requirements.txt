@@ -1,3 +1,12 @@
+# side depends
+colorama
+urllib3
+six
+idna
+click
+charset-normalizer
+certifi
+# main
 requests
 geojson >= 2
 geomet

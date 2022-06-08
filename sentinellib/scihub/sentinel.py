@@ -80,8 +80,7 @@ class SentinelAPI:
             self.session.auth = (user, password)
         self.api_url = api_url if api_url.endswith("/") else api_url + "/"
         self.page_size = 100
-        self.user_agent = "sentinelsat/" + sentinelsat_version
-        self.session.headers["User-Agent"] = self.user_agent
+        self.session.headers["User-Agent"] = "sentinelsat"
         self.session.timeout = timeout
         self.check_cert = cert
         self._dhus_version = None

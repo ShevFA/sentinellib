@@ -93,7 +93,7 @@ class Downloader:
         lta_retry_delay=60,
         lta_timeout=None
     ):
-        from sentinelsat import SentinelAPI
+        # from scihub import SentinelAPI
 
         self.api = api
         self.logger = self.api.logger

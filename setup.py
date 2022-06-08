@@ -20,7 +20,7 @@ setuptools.setup(
     author='Shevelev Fedor',
     author_email='shevelyov@scanex.ru',
     classifiers=['Programming Language :: Python :: 3.9'],
-    packages=['sentinellib'],
+    packages=['sentinellib', 'sentinellib.s2gcp', 'sentinellib.scihub'],
     include_package_data=True,
     python_requires='>=3.6',
     install_requires=['requests', 'geojson', 'geomet']

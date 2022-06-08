@@ -1,3 +1,7 @@
 data
 temp
 __pycache__
+env
+build
+dist
+sentinellib.egg-info
