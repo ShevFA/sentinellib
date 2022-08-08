@@ -333,7 +333,7 @@ class SentinelAPI:
                 if limit is not None:
                     new_limit = limit - new_offset + offset
                 self.logger.info("Load batch {}-{}".format(new_offset, new_offset+self.page_size))
-                ret = self._load_subquery(query, order_by, new_limit, new_offset)[0]
+                ret = self._load_subquery(query, formatted_order_by, new_limit, new_offset)[0]
                 
                 yield _parse_opensearch_response(ret)
         else:
@@ -433,10 +433,22 @@ class SentinelAPI:
 
         # load query results
         url = self._format_url(order_by, limit, offset)
-        # Unlike POST, DHuS only accepts latin1 charset in the GET params
-        with self.dl_limit_semaphore:
-            response = self.session.get(url, params={"q": query.encode("latin1")}, verify=self.check_cert)
-        self._check_scihub_response(response, query_string=query)
+        
+        attempts = 0
+        err = None
+        while attempts < 5:
+            try:
+                # Unlike POST, DHuS only accepts latin1 charset in the GET params
+                with self.dl_limit_semaphore:
+                    response = self.session.get(url, params={"q": query.encode("latin1")}, verify=self.check_cert)
+                self._check_scihub_response(response, query_string=query)
+                break
+            except ServerError as e:
+                attempts += 1
+                self.logger.warning("Attempt {} failed".format(attempts))
+                err = e
+        else:
+            raise Exception("Maximum retry (5) exceeded. Server error:", err, e)
 
         # store last status code (for testing)
         self._last_response = response
